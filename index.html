@@ -1,73 +1,258 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
+body {
+  margin: 0 auto;
+}
+
+#desc {
+  position: absolute;
+  z-index: 2;
+  width: 20em;
+  padding: 5em;
+  background-color: #fff;
+  display: none;
+}
+
+#desc.active {
+  display: block;
+}
+
+#heading {
+  padding: 2em;
+  max-width: 40em;
+}
 
 .link {
   stroke: #ccc;
 }
 
+.node {
+  cursor: pointer;
+}
+
 .node text {
   pointer-events: none;
-  font: 10px sans-serif;
+  font: 15px sans-serif;
+  fill: #fff;
 }
 
 </style>
 <body>
+<div id="desc"></div>
+<div id="container"></div>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 
-var width = 960,
-    height = 500
+var animationStep = 100;
 
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
+var width = window.innerWidth,
+    height = window.innerHeight;
+
+var svg = d3.select("#container").append("svg")
+    .attr("viewBox", "0 0 " + width + " " + height)
+    .attr("preserveAspectRatio", "xMidYMid meet");
 
 var force = d3.layout.force()
-    .gravity(0.05)
-    .distance(100)
-    .charge(-100)
-    .size([width, height]);
+    .size([width,height])
+    .gravity(0.1)
+    .linkStrength(0.1)
+    .linkDistance(300)
+    // .friction(0.5)
+    .charge(-1000);
 
-d3.json("graph.json", function(error, json) {
+var links;
+var nodes;
+
+var bounds = {
+  // heading: document.querySelector('#heading').getBoundingClientRect(),
+  desc: document.querySelector("#desc").getBoundingClientRect()
+};
+
+window.onresize = function() {
+    width = window.innerWidth,
+    height = window.innerHeight;
+    
+    svg.attr("viewBox", "0 0 " + width + " " + height);
+
+    force.size([width, height]);
+    force.resume();
+};
+
+d3.json("data.json", function(error, json) {
   if (error) throw error;
 
-  force
-      .nodes(json.nodes)
-      .links(json.links)
-      .start();
+  var update = function(n, l) {
+    // convert to actual points if needed
+    // n.forEach(function(d) {
+    //   if (d.x && d.x < 1)
+    //     d.x = d.x * width;
 
-  var link = svg.selectAll(".link")
-      .data(json.links)
-    .enter().append("line")
+    //   if (d.y && d.y < 1)
+    //     d.y = d.y * width;
+
+    //   console.log(d.x, d.y);
+    // });
+
+    force
+      .nodes(n)
+      .links(l);
+
+    links = svg.selectAll(".link").data(l);
+
+    var linkEnter = links.enter()
+      .insert("line",":first-child")
       .attr("class", "link");
 
-  var node = svg.selectAll(".node")
-      .data(json.nodes)
-    .enter().append("g")
+    nodes = svg.selectAll(".node").data(n);
+
+    var nodeEnter = nodes.enter()
+      .append("g")
       .attr("class", "node")
       .call(force.drag);
+      
+    nodeEnter
+      .append("circle");
 
-  node.append("image")
-      .attr("xlink:href", "https://github.com/favicon.ico")
-      .attr("x", -8)
-      .attr("y", -8)
-      .attr("width", 16)
-      .attr("height", 16);
+    nodeEnter
+      .append("text")
+      .attr("transform", function(d) { return "translate(-15,5)"; });
 
-  node.append("text")
-      .attr("dx", 12)
-      .attr("dy", ".35em")
-      .text(function(d) { return d.name });
+    nodes.select('circle').attr("r", function(d) { return d.radius; })      
+    nodes.select('text').text(function(d) { return d.name; })
+
+
+    // nodes.exit().transition().
+    svg.on("click", function() {
+      d3.select('#desc').classed("active",false);
+    });
+  
+
+    nodes.on("click", function(d) {
+
+      nodes.selectAll('.thumb').remove();
+
+      d3.select(this).append("svg:image")
+        .attr('class', 'thumb')
+        .attr("xlink:href",  function(d) { return d.img; })
+        .attr("x", function(d) { return -1 * d.radius; })
+        .attr("y", function(d) { return -1 * d.radius; })
+        .attr("height", function(d) { return d.radius * 2; })
+        .attr("width", function(d) { return d.radius * 2; });
+
+      var desc = d3.select('#desc');
+
+      desc.html(d.desc);
+      desc.classed("active",true);
+      desc.style("left", d.x + 50 + 'px');
+      desc.style("top", d.y + 'px');
+      // bounds.desc = document.querySelector("#desc").getBoundingClientRect();
+
+      d3.event.stopPropagation();
+    });
+  }
+
+  update(json.nodes, json.links);
+
+  nodes.on("click", function(d) {
+    // nodes.classed("fixed", function(d) { d.fixed = false; return d.fixed; });
+    // d3.select(this).classed("fixed", d.fixed = true);
+    update(json.nodes2, json.links2);
+    force.start();
+  });
 
   force.on("tick", function() {
-    link.attr("x1", function(d) { return d.source.x; })
+    var n = nodes.data(),
+        q = d3.geom.quadtree(n),
+        i = 0;
+
+
+    // q.add({
+    //   x: bounds.heading.right,
+    //   y: bounds.heading.bottom,
+    //   radius: 50
+    // });
+
+    // q.add({
+    //   x: bounds.heading.right / 2,
+    //   y: bounds.heading.bottom,
+    //   radius: 50
+    // });
+
+  
+    // if (bounds.desc.top) {
+    //   q.add({
+    //     x: bounds.desc.left,
+    //     y: bounds.desc.top,
+    //     radius: 50
+    //   });
+
+    //   q.add({
+    //     x: bounds.desc.left,
+    //     y: bounds.desc.bottom,
+    //     radius: 50
+    //   });
+
+    // }    
+
+
+    // avoid collisions
+    while (++i < n.length) q.visit(collide(n[i]));
+
+  
+    nodes.attr("transform", function(d) { 
+      d.x = Math.max(d.radius, Math.min(width - d.radius, d.x));
+      d.y = Math.max(d.radius, Math.min(height - d.radius, d.y));
+
+      return "translate(" + d.x + "," + d.y + ")"; 
+    });
+
+    links.attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; });
 
-    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    // nodes.transition().ease('linear').duration(animationStep)
+    //     .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+    // links.transition().ease('linear').duration(animationStep)
+    //     .attr('x1', function(d) { return d.source.x; })
+    //     .attr('y1', function(d) { return d.source.y; })
+    //     .attr('x2', function(d) { return d.target.x; })
+    //     .attr('y2', function(d) { return d.target.y; });        
+
+    // force.stop();
+    // setTimeout(
+    //     function() { force.resume(); },
+    //     animationStep
+    // );    
   });
+
+  force.start();
 });
+
+function collide(node) {
+  var r = node.radius,
+      nx1 = node.x - r,
+      nx2 = node.x + r,
+      ny1 = node.y - r,
+      ny2 = node.y + r;
+  return function(quad, x1, y1, x2, y2) {
+    if (quad.point && (quad.point !== node)) {
+      var x = node.x - quad.point.x,
+          y = node.y - quad.point.y,
+          l = Math.sqrt(x * x + y * y),
+          r = node.radius + quad.point.radius;
+      if (l < r) {
+        l = (l - r) / l * .5;
+        node.x -= x *= l;
+        node.y -= y *= l;
+        quad.point.x += x;
+        quad.point.y += y;
+      }
+    }
+    return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+  };
+}
 
 </script>
