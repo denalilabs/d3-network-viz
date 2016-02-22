@@ -2,19 +2,19 @@
 
   "nodes1": [
     {
-      "name": "One",
+      "name": "A",
       "radius": 50,
       "x": 0.3,
       "y": 0.3
     },
     {
-      "name": "Two",
+      "name": "B",
       "x": 0.7,
       "y": 0.3,
       "radius": 50
     },
     {
-      "name": "Three",
+      "name": "C",
       "x": 0.7,
       "y": 0.7,
       "radius": 50
