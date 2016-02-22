@@ -2,6 +2,7 @@
 <meta charset="utf-8">
 <style>
 body {
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -37,8 +38,39 @@ body {
   fill: #fff;
 }
 
+header {
+  padding: 1em;
+  max-width: 30em;
+  font-family: Helevetica;
+}
+
+[data-mode] {
+  display: none;
+}
+
 </style>
 <body>
+<header>
+<div data-mode="1">
+  <h1> Home </h1>
+  <p>
+  This is a simple force layout with gravity pulling the nodes towards center of viewport. Resize the browser to test responsive layout.
+  </p>
+</div>
+<div data-mode="2">
+  <h1> Page 1 </h1>
+  <p>
+  This is a clustered force layout, with multiple points of gravity. Ignore the overlapping groups, they will be pushed away from each other.
+  </p>
+</div>
+<div data-mode="3">
+  <h1> Page 2 </h1>
+  <p>
+  This is a mesh layout, with random initial positioning. Click on any node to bring up image with description.
+  </p>
+</div>
+
+</header>
 <div id="desc"></div>
 <div id="container"></div>
 <script src="//d3js.org/d3.v3.min.js"></script>
@@ -54,12 +86,12 @@ var svg = d3.select("#container").append("svg")
     .attr("preserveAspectRatio", "xMidYMid meet");
 
 var force = d3.layout.force()
-    .size([width,height])
+    .size([width,500])
     .gravity(0.1)
     .linkStrength(0.1)
     .linkDistance(300)
-    // .friction(0.5)
-    .charge(-1000);
+    // .friction(0.1)
+    .charge(-2000);
 
 var links;
 var nodes;
@@ -70,33 +102,42 @@ var bounds = {
 };
 
 window.onresize = function() {
-    width = window.innerWidth,
-    height = window.innerHeight;
+    width = window.innerWidth;
+    // height = 1440 * 1280 / width;
     
     svg.attr("viewBox", "0 0 " + width + " " + height);
 
-    force.size([width, height]);
+    force.size([width, 500]);
     force.resume();
 };
 
+var mode = 0;
 d3.json("data.json", function(error, json) {
   if (error) throw error;
 
-  var update = function(n, l) {
-    // convert to actual points if needed
-    // n.forEach(function(d) {
-    //   if (d.x && d.x < 1)
-    //     d.x = d.x * width;
+  var update = function() {
+    mode += 1;
 
-    //   if (d.y && d.y < 1)
-    //     d.y = d.y * width;
+    d3.selectAll('[data-mode]').style("display","none");
+    d3.select('[data-mode="'+mode+'"]').style("display","block");
 
-    //   console.log(d.x, d.y);
-    // });
+    n = json['nodes' + mode];
+    l = json['links' + mode];
+
+    n.forEach(function(d) {
+      if (d.x && d.x < 1)
+        d.x = d.x * width;
+
+      if (d.y && d.y < 1)
+        d.y = d.y * width;
+
+      console.log(d.x, d.y);
+    });
 
     force
       .nodes(n)
-      .links(l);
+      .links(l)
+      .start();
 
     links = svg.selectAll(".link").data(l);
 
@@ -122,46 +163,49 @@ d3.json("data.json", function(error, json) {
     nodes.select('text').text(function(d) { return d.name; })
 
 
-    // nodes.exit().transition().
+    nodes.exit().remove();
+
     svg.on("click", function() {
       d3.select('#desc').classed("active",false);
     });
   
 
-    nodes.on("click", function(d) {
+    if (mode < 3) {
 
-      nodes.selectAll('.thumb').remove();
+      nodes.on("click", update);
 
-      d3.select(this).append("svg:image")
-        .attr('class', 'thumb')
-        .attr("xlink:href",  function(d) { return d.img; })
-        .attr("x", function(d) { return -1 * d.radius; })
-        .attr("y", function(d) { return -1 * d.radius; })
-        .attr("height", function(d) { return d.radius * 2; })
-        .attr("width", function(d) { return d.radius * 2; });
+    } else {
 
-      var desc = d3.select('#desc');
+      nodes.on("click", function(d) {
 
-      desc.html(d.desc);
-      desc.classed("active",true);
-      desc.style("left", d.x + 50 + 'px');
-      desc.style("top", d.y + 'px');
-      // bounds.desc = document.querySelector("#desc").getBoundingClientRect();
+        nodes.selectAll('.thumb').remove();
 
-      d3.event.stopPropagation();
-    });
+        d3.select(this).append("svg:image")
+          .attr('class', 'thumb')
+          .attr("xlink:href",  function(d) { return d.img; })
+          .attr("x", function(d) { return -1 * d.radius; })
+          .attr("y", function(d) { return -1 * d.radius; })
+          .attr("height", function(d) { return d.radius * 2; })
+          .attr("width", function(d) { return d.radius * 2; });
+
+        var desc = d3.select('#desc');
+
+        desc.html(d.desc);
+        desc.classed("active",true);
+        desc.style("left", d.x + 50 + 'px');
+        desc.style("top", d.y + 'px');
+        // bounds.desc = document.querySelector("#desc").getBoundingClientRect();
+
+        d3.event.stopPropagation();
+      });
+    }
   }
 
-  update(json.nodes, json.links);
+  update();
 
-  nodes.on("click", function(d) {
-    // nodes.classed("fixed", function(d) { d.fixed = false; return d.fixed; });
-    // d3.select(this).classed("fixed", d.fixed = true);
-    update(json.nodes2, json.links2);
-    force.start();
-  });
+  nodes.on("click", update);
 
-  force.on("tick", function() {
+  force.on("tick", function(e) {
     var n = nodes.data(),
         q = d3.geom.quadtree(n),
         i = 0;
@@ -195,6 +239,7 @@ d3.json("data.json", function(error, json) {
 
     // }    
 
+    // n.forEach(gravity(0.2 * e.alpha));
 
     // avoid collisions
     while (++i < n.length) q.visit(collide(n[i]));
@@ -227,9 +272,15 @@ d3.json("data.json", function(error, json) {
     //     animationStep
     // );    
   });
-
-  force.start();
 });
+
+// Move nodes toward cluster focus.
+function gravity(alpha) {
+  return function(d) {
+    d.y += (d.py - d.y) * alpha;
+    d.x += (d.px - d.x) * alpha;
+  };
+}
 
 function collide(node) {
   var r = node.radius,

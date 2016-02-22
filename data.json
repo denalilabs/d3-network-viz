@@ -1,23 +1,110 @@
 {
 
-  "nodes": [
+  "nodes1": [
     {
       "name": "One",
-      "radius": 50
+      "radius": 50,
+      "x": 0.3,
+      "y": 0.3
     },
     {
       "name": "Two",
+      "x": 0.7,
+      "y": 0.3,
       "radius": 50
-
     },
     {
       "name": "Three",
+      "x": 0.7,
+      "y": 0.7,
       "radius": 50
-
     }
   ],
 
   "nodes2": [
+    {
+      "name": "Group1",
+      "desc": "Vestibulum id ligula porta felis euismod semper.Pellentesque ornare sem lacinia quam venenatis vestibulum.",
+      "x": 0.3,
+      "y": 0.3,
+      "radius": 50,
+      "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
+    },
+    {
+      "name": "Group1",
+      "desc": "Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. ",
+      "x": 0.3,
+      "y": 0.3,
+      "radius": 50,
+      "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
+    },
+    {
+      "name": "Group1",
+      "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
+      "x": 0.3,
+      "y": 0.3,
+      "radius": 50,
+      "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
+    },
+    {
+      "name": "Group2",
+      "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
+      "x": 0.7,
+      "y": 0.7,
+      "radius": 50,
+      "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
+    },
+    {
+      "name": "Group2",
+      "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
+      "x": 0.7,
+      "y": 0.7,
+      "radius": 50,
+      "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
+    },
+    {
+      "name": "Group2",
+      "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
+      "x": 0.7,
+      "y": 0.7,
+      "radius": 50,
+      "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
+    },
+    {
+      "name": "Group3",
+      "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
+      "x": 0.7,
+      "y": 0.2,
+      "radius": 50,
+      "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
+    },
+    {
+      "name": "Group3",
+      "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
+      "x": 0.7,
+      "y": 0.2,
+      "radius": 50,
+      "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
+    },
+    {
+      "name": "Group3",
+      "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
+      "x": 0.7,
+      "y": 0.2,
+      "radius": 50,
+      "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
+    },
+    {
+      "name": "Group3",
+      "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
+      "x": 0.7,
+      "y": 0.2,
+      "radius": 50,
+      "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
+    }
+  ],
+
+  "nodes3": [
     {
       "name": "One",
       "desc": "Vestibulum id ligula porta felis euismod semper.Pellentesque ornare sem lacinia quam venenatis vestibulum.",
@@ -92,7 +179,7 @@
     }
   ],
   
-  "links": [
+  "links1": [
     {
       "source": 0,
       "target": 1
@@ -108,6 +195,53 @@
   ],
 
   "links2": [
+    {
+      "source": 0,
+      "target": 1
+    },
+    {
+      "source": 0,
+      "target": 2
+    },
+    {
+      "source": 1,
+      "target": 2
+    },
+    {
+      "source": 3,
+      "target": 4
+    },
+    {
+      "source": 3,
+      "target": 5
+    },
+    {
+      "source": 4,
+      "target": 5
+    },
+    {
+      "source": 6,
+      "target": 7
+    },
+    {
+      "source": 6,
+      "target": 8
+    },
+    {
+      "source": 7,
+      "target": 8
+    },
+    {
+      "source": 8,
+      "target": 9
+    },
+    {
+      "source": 6,
+      "target": 9
+    }
+  ],
+
+  "links3": [
     {
       "source": 0,
       "target": 1
@@ -158,8 +292,8 @@
     },
 
     {
-      "source": 5,
-      "target": 6
+      "source": 10,
+      "target": 11
     }  
   ]
 
