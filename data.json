@@ -2,19 +2,19 @@
 
   "nodes1": [
     {
-      "name": "Product",
+      "name": "Design",
       "radius": 50,
       "x": 0.3,
       "y": 0.3
     },
     {
-      "name": "Engineering",
+      "name": "Develop",
       "x": 0.7,
       "y": 0.3,
       "radius": 50
     },
     {
-      "name": "Marketing",
+      "name": "Sales",
       "x": 0.7,
       "y": 0.7,
       "radius": 50
