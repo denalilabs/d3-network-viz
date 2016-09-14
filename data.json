@@ -2,19 +2,19 @@
 
   "nodes1": [
     {
-      "name": "A",
+      "name": "Product",
       "radius": 50,
       "x": 0.3,
       "y": 0.3
     },
     {
-      "name": "B",
+      "name": "Engineering",
       "x": 0.7,
       "y": 0.3,
       "radius": 50
     },
     {
-      "name": "C",
+      "name": "Marketing",
       "x": 0.7,
       "y": 0.7,
       "radius": 50
@@ -23,7 +23,7 @@
 
   "nodes2": [
     {
-      "name": "Group1",
+      "name": "Design",
       "desc": "Vestibulum id ligula porta felis euismod semper.Pellentesque ornare sem lacinia quam venenatis vestibulum.",
       "x": 0.3,
       "y": 0.3,
@@ -31,7 +31,7 @@
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-      "name": "Group1",
+      "name": "Develop",
       "desc": "Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. ",
       "x": 0.3,
       "y": 0.3,
@@ -39,7 +39,7 @@
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-      "name": "Group1",
+      "name": "Content",
       "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
       "x": 0.3,
       "y": 0.3,
@@ -47,7 +47,7 @@
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-      "name": "Group2",
+      "name": "Release",
       "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
       "x": 0.7,
       "y": 0.7,
@@ -55,7 +55,7 @@
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-      "name": "Group2",
+      "name": "Payments",
       "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
       "x": 0.7,
       "y": 0.7,
@@ -63,7 +63,7 @@
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-      "name": "Group2",
+      "name": "Server",
       "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
       "x": 0.7,
       "y": 0.7,
@@ -71,7 +71,7 @@
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-      "name": "Group3",
+      "name": "Frontsite",
       "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
       "x": 0.7,
       "y": 0.2,
@@ -79,7 +79,7 @@
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-      "name": "Group3",
+      "name": "Advertising",
       "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
       "x": 0.7,
       "y": 0.2,
@@ -87,15 +87,7 @@
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-      "name": "Group3",
-      "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
-      "x": 0.7,
-      "y": 0.2,
-      "radius": 50,
-      "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
-    },
-    {
-      "name": "Group3",
+      "name": "Partnerships",
       "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
       "x": 0.7,
       "y": 0.2,
@@ -106,73 +98,73 @@
 
   "nodes3": [
     {
-      "name": "One",
+      "name": "John",
       "desc": "Vestibulum id ligula porta felis euismod semper.Pellentesque ornare sem lacinia quam venenatis vestibulum.",
       "radius": 50,
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-      "name": "Two",
+      "name": "Adam",
       "desc": "Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. ",
       "radius": 50,
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-      "name": "Three",
+      "name": "Eric",
       "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
       "radius": 50,
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-    	"name": "Four",
+    	"name": "Justin",
       "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
       "radius": 50,
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-    	"name": "Five",
+    	"name": "Julien",
       "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
       "radius": 50,
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-      "name": "Six",
+      "name": "Sam",
       "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
       "radius": 50,
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-      "name": "Seven",
+      "name": "Kevin",
       "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
       "radius": 50,
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-      "name": "Eight",
+      "name": "Tony",
       "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
       "radius": 50,
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-      "name": "Nine",
+      "name": "Christina",
       "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
       "radius": 50,
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-      "name": "Ten",
+      "name": "Bob",
       "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
       "radius": 50,
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-      "name": "Eleven",
+      "name": "Alice",
       "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
       "radius": 50,
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
     },
     {
-      "name": "Twelve",
+      "name": "Alex",
       "desc": "Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. ",
       "radius": 50,
       "img": "https://dl.dropboxusercontent.com/u/19954023/marvel_force_chart_img/top_blackwidow.png"
