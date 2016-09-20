@@ -1,6 +1,6 @@
 # Visualization using d3 force layout
 
-Research notes for a data visualization consulting project - http://riyazshaikh.github.io/d3-network-viz/
+Research notes for a data visualization consulting project - http://denalilabs.github.io/d3-network-viz/
 
 # Background
 The d3 force layout is a physical simulation, that mainly relies on repulsive charges and center of gravity to control its behavior. There is an inherent randomness in the resulting layout, which seems like a good choice for infographic designs. However there are a few side-effects of this choice that you should be aware of:
